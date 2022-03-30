@@ -1,9 +1,11 @@
 import React from "react";
 import styles from "./Button.module.sass";
 
-const Button = ({ className, value, onClick }) => {
+const Button = ({ id, value, type, onClick }) => {
+  const className = styles[id] || styles[type];
+  console.log({type, styles, className});
   return (
-    <button className={styles[className]} onClick={onClick}>
+    <button id={id} className={className} onClick={onClick}>
       {value}
     </button>
   );
