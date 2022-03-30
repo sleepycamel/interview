@@ -1,6 +1,6 @@
 import React from "react";
 import { Textfit } from "react-textfit";
-import "./Screen.css";
+import "./Screen.sass";
 
 const Screen = ({ value }) => {
   return (
