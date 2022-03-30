@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.sass'
+import Calculator from "../components/Calculator";
 
 export default function CalculatorPage() {
   return (
@@ -13,8 +14,10 @@ export default function CalculatorPage() {
 
         <main className={styles.main}>
           <h1 className={styles.title}>
-            Welcome to Calculator!!!
+            Welcome to Calculator!
           </h1>
+          <Calculator />
+
 
           <p className={styles.description}>
             Get started by editing{' '}
