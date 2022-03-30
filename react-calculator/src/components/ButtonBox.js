@@ -1,8 +1,8 @@
 import React from "react";
-import "./ButtonBox.sass";
+import styles from "./ButtonBox.module.sass";
 
 const ButtonBox = ({ children }) => {
-  return <div className="buttonBox">{children}</div>;
+  return <div className={styles.buttonBox}>{children}</div>;
 };
 
 export default ButtonBox;

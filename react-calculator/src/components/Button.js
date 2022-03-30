@@ -1,9 +1,9 @@
 import React from "react";
-import "./Button.sass";
+import styles from "./Button.module.sass";
 
 const Button = ({ className, value, onClick }) => {
   return (
-    <button className={className} onClick={onClick}>
+    <button className={styles[className]} onClick={onClick}>
       {value}
     </button>
   );
