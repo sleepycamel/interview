@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
 import styles from "./CalculatorApp.module.sass";
 import Screen from "./Screen";
@@ -33,11 +33,32 @@ const START_STATE = new StartState();
 
 export default function CalculatorApp() {
   const [state, setState] = useState(START_STATE);
+  const onKeyDown = (key, oldState) => {
+    console.log('onKeyDown', {key, oldState});
+    let action;
+    if ('0123456789'.includes(key)) {
+      action = ['number', `num${key}`, parseInt(key)];
+    } else if (key === '.') {
+      action = ['number', 'point', key];
+    }
+    if (action) {
+      const newState = oldState.process(...action);
+      console.log({oldState, newState});
+      setState(newState);
+    }
+  };
+
+  useEffect( () => {
+    console.log('mount');
+    document.addEventListener("keydown", (event) => onKeyDown(event.key, state));
+    return () => { console.log('cleanup'); document.removeEventListener("keydown", onKeyDown) }
+  }, [])
+
 
   const onClick = (type, id, value) => {
     console.log('onClick', {type, id, value});
     const newState = state.process(type, id, value);
-    console.log({state, newState});
+    console.log({oldState: state, newState});
     setState(newState);
   };
 
