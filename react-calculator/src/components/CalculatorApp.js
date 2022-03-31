@@ -4,6 +4,7 @@ import styles from "./CalculatorApp.module.sass";
 import Screen from "./Screen";
 import ButtonBox from "./ButtonBox";
 import Button from "./Button";
+import {StartState} from "../lib/CalculatorState";
 
 // const Op = (id, val) => ({ type: 'op', id, val: val || id });
 // const Num = (val) => ({ type: 'num', id: `num${val}`, val});
@@ -29,29 +30,38 @@ const toLocaleString = (num) =>
 const removeSpaces = (num) => num.toString().replace(/\s/g, "");
 
 export default function CalculatorApp() {
+  const [state, setState] = useState(new StartState());
+
+  const onClick = (type, id, value) => {
+    console.log('onClick', {type, id, value});
+    const newState = state.processInput(type, id, value);
+    console.log({state, newState});
+    setState(newState);
+  };
+
   return (
       <div className={styles.CalculatorApp}>
-        <Screen value={0} />
+        <Screen value={state.readout} />
         <ButtonBox>
-          <Button id="clear" value="AC" type="function" />
-          <Button id="sign" value="±" type="function" />
-          <Button id="percent" value="%" type="function" />
-          <Button id="divide" value="÷" type="operator" />
-          <Button id="num7" value={7} />
-          <Button id="num8" value={8} />
-          <Button id="num9" value={9} />
-          <Button id="multiply" value="x" type="operator" />
-          <Button id="num4" value={4} />
-          <Button id="num5" value={5} />
-          <Button id="num6" value={6} />
-          <Button id="subtract" value="-" type="operator" />
-          <Button id="num1" value={1} />
-          <Button id="num2" value={2} />
-          <Button id="num3" value={3} />
-          <Button id="add" value="+" type="operator" />
-          <Button id="num0" value={0} />
-          <Button id="point" value="." />
-          <Button id="equal" value="=" type="operator" />
+          <Button id="clear" value="AC" type="function" onClick={onClick} />
+          <Button id="sign" value="±" type="function"  onClick={onClick} />
+          <Button id="percent" value="%" type="function"  onClick={onClick} />
+          <Button id="divide" value="÷" type="operator"  onClick={onClick} />
+          <Button id="num7" value={7} onClick={onClick} />
+          <Button id="num8" value={8} onClick={onClick} />
+          <Button id="num9" value={9} onClick={onClick} />
+          <Button id="multiply" value="x" type="operator"  onClick={onClick} />
+          <Button id="num4" value={4} onClick={onClick} />
+          <Button id="num5" value={5} onClick={onClick} />
+          <Button id="num6" value={6} onClick={onClick} />
+          <Button id="subtract" value="-" type="operator" onClick={onClick} />
+          <Button id="num1" value={1} onClick={onClick} />
+          <Button id="num2" value={2} onClick={onClick} />
+          <Button id="num3" value={3} onClick={onClick} />
+          <Button id="add" value="+" type="operator" onClick={onClick} />
+          <Button id="num0" value={0} onClick={onClick} />
+          <Button id="point" value="." onClick={onClick} />
+          <Button id="equal" value="=" type="operator" onClick={onClick} />
         </ButtonBox>
       </div>
   );
