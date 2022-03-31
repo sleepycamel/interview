@@ -17,7 +17,7 @@ export default class CalculatorState {
     if (id === 'clear') {
       return new StartState();
     }
-    return this;
+    return this; // noop
   }
 
   getOperator() {

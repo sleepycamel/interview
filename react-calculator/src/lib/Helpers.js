@@ -4,7 +4,11 @@ export function numDigits(s) {
 }
 
 export function appendDigit(s, digit) {
-  return `${s}${digit}`.replace(/^0+/, '');
+  let str = `${s}${digit}`;
+  if (!str.includes('.')) {
+    str = str.replace(/^0+/, '');
+  }
+  return str;
 }
 
 export function toggleSign(s) {

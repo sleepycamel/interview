@@ -15,9 +15,7 @@ export default class GetFirstNumberState extends CalculatorState {
       return new GetFirstFloatState(newAccumulator1);
     } else if (id === 'sign') {
       return new GetFirstNumberState(toggleSign(this.accumulator1))
-    } else if (type === 'number' && numDigits(this.accumulator1) === maxDigits) {
-      return this; // noop - max number of digits reached
-    } else if (type === 'number') {
+    } else if (type === 'number' && numDigits(this.accumulator1) < maxDigits) {
       return new GetFirstNumberState(newAccumulator1);
     } else if (type === 'operator' && id !== 'equal') {
       return new FirstOperatorState(this.accumulator1, id);

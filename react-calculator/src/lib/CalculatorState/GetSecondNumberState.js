@@ -23,10 +23,6 @@ export default class GetSecondNumberState extends CalculatorState {
     } else if (type === 'number') {
       return new GetSecondNumberState(newAccumulator1);
     }
-    // else if (type === 'operator' && id !== 'equal') {
-    //   return new FirstOperatorState(this.accumulator1, id);
-    // }
-
-    return this;
+    return super.process(type, id, value);
   }
 }

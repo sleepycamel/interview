@@ -15,9 +15,7 @@ export default class GetSecondFloatState extends CalculatorState {
   process(type, id, value) {
     const accumulator1 = this.accumulator1;
     const newAccumulator1 = appendDigit(this.accumulator1, value);
-    if (id === 'clear') {
-      return new StartState();
-    } else if (id === 'point' && numDigits(this.accumulator1) < maxDigits) {
+    if (id === 'point' && numDigits(this.accumulator1) < maxDigits) {
       return new GetSecondFloatState(newAccumulator1);
     } else if (id === 'point') {
       return this; // noop - 1 decimal point per number
@@ -29,12 +27,6 @@ export default class GetSecondFloatState extends CalculatorState {
       const newAccumulator1 = `${this.accumulator1}${value}`;
       return new GetSecondFloatState(newAccumulator1);
     }
-
-
-    // else if (type === 'operator' && id !== 'equal') {
-    //   return new FirstOperatorState(this.accumulator1, id);
-    // }
-
-    return this;
+    return super.process(type, id, value);
   }
 }
