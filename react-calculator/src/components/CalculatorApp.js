@@ -42,9 +42,8 @@ export default function CalculatorApp() {
       action = ['number', 'point', key];
     }
     if (action) {
-      const newState = oldState.process(...action);
-      console.log({oldState, newState});
-      setState(newState);
+      // Update state using function to avoid stale closure
+      setState((oldState) => oldState.process(...action));
     }
   };
 
