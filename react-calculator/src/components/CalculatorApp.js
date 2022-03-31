@@ -33,8 +33,9 @@ const START_STATE = new StartState();
 
 export default function CalculatorApp() {
   const [state, setState] = useState(START_STATE);
-  const onKeyDown = (key, oldState) => {
-    console.log('onKeyDown', {key, oldState});
+  const onKeyDown = evt => {
+    const {key} = evt;
+    console.log('onKeyDown', {key});
     let action;
     if ('0123456789'.includes(key)) {
       action = ['number', `num${key}`, parseInt(key)];
@@ -49,7 +50,7 @@ export default function CalculatorApp() {
 
   useEffect( () => {
     console.log('mount');
-    document.addEventListener("keydown", (event) => onKeyDown(event.key, state));
+    document.addEventListener("keydown", onKeyDown);
     return () => { console.log('cleanup'); document.removeEventListener("keydown", onKeyDown) }
   }, [])
 
@@ -61,28 +62,29 @@ export default function CalculatorApp() {
     setState(newState);
   };
 
-  console.log('operator = ', state.getOperator());
+  const activeOperator = state.getOperator();
+  console.log('operator = ', activeOperator);
 
   return (
       <div className={styles.CalculatorApp}>
         <Screen value={state.readout} />
         <ButtonBox>
-          <Button id="clear" value="AC" type="function" onClick={onClick} />
+          <Button id="clear" value="AC" type="function" onClick={onClick}/>
           <Button id="sign" value="±" type="function"  onClick={onClick} />
           <Button id="percent" value="%" type="function"  onClick={onClick} />
-          <Button id="divide" value="÷" type="operator"  onClick={onClick} />
+          <Button id="divide" value="÷" type="operator"  onClick={onClick} isActive={activeOperator === 'divide'} />
           <Button id="num7" value={7} onClick={onClick} />
           <Button id="num8" value={8} onClick={onClick} />
           <Button id="num9" value={9} onClick={onClick} />
-          <Button id="multiply" value="x" type="operator"  onClick={onClick} />
+          <Button id="multiply" value="x" type="operator"  onClick={onClick} isActive={activeOperator === 'multiply'} />
           <Button id="num4" value={4} onClick={onClick} />
           <Button id="num5" value={5} onClick={onClick} />
           <Button id="num6" value={6} onClick={onClick} />
-          <Button id="subtract" value="-" type="operator" onClick={onClick} />
+          <Button id="subtract" value="-" type="operator" onClick={onClick} isActive={activeOperator === 'subtract'} />
           <Button id="num1" value={1} onClick={onClick} />
           <Button id="num2" value={2} onClick={onClick} />
           <Button id="num3" value={3} onClick={onClick} />
-          <Button id="add" value="+" type="operator" onClick={onClick} />
+          <Button id="add" value="+" type="operator" onClick={onClick} isActive={activeOperator === 'add'} />
           <Button id="num0" value={0} onClick={onClick} />
           <Button id="point" value="." onClick={onClick} />
           <Button id="equal" value="=" type="operator" onClick={onClick} />

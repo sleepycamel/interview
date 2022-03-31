@@ -1,11 +1,12 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import styles from "./Button.module.sass";
+import cn from 'classnames';
 
-export default function Button({ id, value, type, onClick }) {
+export default function Button({ id, value, type, onClick, isActive }) {
   const className = styles[id] || styles[type];
   return (
-    <button id={id} className={className} onClick={() => onClick(type, id, value)}>
+    <button id={id} className={cn(className, {[styles.isActive]: isActive})} onClick={() => onClick(type, id, value)}>
       {value}
     </button>
   );
@@ -16,8 +17,10 @@ Button.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   type: PropTypes.oneOf(['function', 'number', 'operator']),
   onClick: PropTypes.func.isRequired,
+  isActive: PropTypes.bool
 }
 
 Button.defaultProps = {
-  type: 'number'
+  type: 'number',
+  isActive: false
 }
