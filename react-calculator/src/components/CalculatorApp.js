@@ -61,6 +61,8 @@ export default function CalculatorApp() {
     setState(newState);
   };
 
+  console.log('operator = ', state.getOperator());
+
   return (
       <div className={styles.CalculatorApp}>
         <Screen value={state.readout} />

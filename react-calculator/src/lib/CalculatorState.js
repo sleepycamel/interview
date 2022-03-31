@@ -6,6 +6,8 @@ class CalculatorState {
 
   accumulator1 = "0";
   readout = "0";
+  operator1 = null;
+  operator2 = null;
 
   constructor(accumulator1="0", readout="0") {
     // console.log('base constructor', {accumulator1, readout});
@@ -14,14 +16,14 @@ class CalculatorState {
   }
 
   process(type, id, value) {
-    // console.log('process input', {type, id, value});
     if (id === 'clear') {
       return new StartState();
     }
     return this;
-    //
-    // const accumulator1 = `${this.accumulator1}${value}`;
-    // return new CalculatorState(accumulator1, accumulator1);
+  }
+
+  getOperator() {
+    return this.operator2 ? this.operator2 : this.operator1;
   }
 }
 
@@ -58,7 +60,11 @@ export class Accumulator1State extends CalculatorState {
       return this; // noop - max number of digits reached
     } else if (type === 'number') {
       return new Accumulator1State(newAccumulator1);
+    } else if (id === 'add') {
+      return new Operator1State(this.accumulator1, id);
     }
+
+    return this;
   }
 }
 
@@ -86,7 +92,14 @@ export class FloatAccumulator1State extends CalculatorState {
       const newAccumulator1 = `${this.accumulator1}${value}`;
       return new FloatAccumulator1State(newAccumulator1);
     }
+    return this;
   }
+}
 
+export class Operator1State extends CalculatorState {
+  constructor(accumulator1, operator1) {
+    super(accumulator1, accumulator1)
+    this.operator1 = operator1;
+  }
 
 }
