@@ -29,12 +29,14 @@ const toLocaleString = (num) =>
 
 const removeSpaces = (num) => num.toString().replace(/\s/g, "");
 
+const START_STATE = new StartState();
+
 export default function CalculatorApp() {
-  const [state, setState] = useState(new StartState());
+  const [state, setState] = useState(START_STATE);
 
   const onClick = (type, id, value) => {
     console.log('onClick', {type, id, value});
-    const newState = state.processInput(type, id, value);
+    const newState = state.process(type, id, value);
     console.log({state, newState});
     setState(newState);
   };
