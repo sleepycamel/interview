@@ -1,5 +1,5 @@
 import { CalculatorState, GetFirstFloatState, GetFirstNumberState } from './';
-import { appendDigit } from "../Helpers";
+import { appendDigit } from "../helpers";
 
 export default class StartState extends CalculatorState {
   constructor() {

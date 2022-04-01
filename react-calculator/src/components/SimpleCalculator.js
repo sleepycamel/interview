@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { Textfit } from "react-textfit";
 
-import styles from "./SimpleCalculator.module.sass";
-import Readout from "./Readout";
+import styles from "../styles/SimpleCalculator.module.sass";
 import Button from "./Button";
 import {StartState} from "../lib/CalculatorState";
-import {keyToAction} from "../lib/Helpers";
+import {keyToAction} from "../lib/helpers";
+import {READOUT_MAX_FONTSIZE} from "../lib/constants";
 
 const START_STATE = new StartState();
 
@@ -41,8 +42,10 @@ export default function SimpleCalculator() {
 
   return (
       <div className={styles.SimpleCalculator}>
-        <Readout value={readout} />
-        <div className={styles.buttonGrid}>
+        <Textfit className={styles.readout} mode="single" max={READOUT_MAX_FONTSIZE}>
+          {readout}
+        </Textfit>
+        <div className={styles.buttons}>
           <Button id="clear" value="AC" type="function" onClick={onClick}/>
           <Button id="sign" value="±" type="function"  onClick={onClick} />
           <Button id="percent" value="%" type="function"  onClick={onClick} />

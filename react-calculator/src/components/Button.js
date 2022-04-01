@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import styles from "./Button.module.sass";
+import styles from "../styles/SimpleCalculator.module.sass";
 import cn from 'classnames';
 
 export default function Button({ id, value, type, onClick, isActive }) {

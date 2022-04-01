@@ -1,4 +1,5 @@
 
+export const READOUT_MAX_FONTSIZE = 75;
 export const maxDigits = 9;
 
 export const BUTTONS_TO_OP = {

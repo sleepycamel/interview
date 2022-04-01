@@ -1,0 +1,64 @@
+.SimpleCalculator
+  width: 340px
+  height: 540px
+  padding: 10px
+  border-radius: 10px
+  background-color: black
+
+  .readout
+    height: 100px
+    width: 100%
+    margin-bottom: 10px
+    padding: 0 10px
+    background-color: #4357692d
+    border-radius: 10px
+    display: flex
+    align-items: center
+    justify-content: flex-end
+    color: white
+    font-weight: bold
+    box-sizing: border-box
+
+
+  .buttons
+    display: grid
+    grid-template-columns: repeat(4, 1fr)
+    grid-template-rows: repeat(5, 1fr)
+    grid-gap: 10px
+    width: 100%
+    height: calc(100% - 110px)
+
+  button
+    background: #333
+    border: none
+    border-radius: 50%
+    color: rgb(255, 255, 255)
+    font-size: 32px
+    font-weight: bold
+    cursor: pointer
+    outline: none
+    user-select: none
+    -webkit-tap-highlight-color: transparent
+
+    &:active
+      filter: brightness(125%)
+
+    &.function
+      background: #a5a5a5
+      color: black
+
+    &.operator
+      background: #f1a33c
+      font-size: 40px
+
+    &.num0
+      grid-column: 1 / span 2
+      border-radius: 50px
+      text-align: left
+      padding-left: 28px
+
+    &.isActive
+      background: white
+      color: #f1a33c
+
+

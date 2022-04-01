@@ -1,5 +1,5 @@
 import {CalculatorState, SecondOperatorState, ResultState} from './';
-import { numDigits, appendDigit, toggleSign } from "../Helpers";
+import { numDigits, appendDigit, toggleSign } from "../helpers";
 import { maxDigits } from "../constants";
 import GetThirdFloatState from "./GetThirdFloatState";
 

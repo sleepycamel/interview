@@ -1,5 +1,5 @@
 import {CalculatorState, FirstOperatorState, GetSecondFloatState, SecondOperatorState, ResultState} from './';
-import { numDigits, appendDigit, toggleSign } from "../Helpers";
+import { numDigits, appendDigit, toggleSign } from "../helpers";
 import { maxDigits } from "../constants";
 
 export default class GetSecondNumberState extends CalculatorState {
@@ -16,6 +16,9 @@ export default class GetSecondNumberState extends CalculatorState {
       return new GetSecondNumberState({...this, accumulator2: toggleSign(this.accumulator2)});
     } else if (type === 'number' && numDigits(this.accumulator2) < maxDigits) {
       return new GetSecondNumberState({...this, accumulator2} );
+    } else if (id === 'percent') {
+      const newAccumulator2 = (parseFloat(this.accumulator2)/100).toString();
+      return new GetSecondFloatState({...this, accumulator2: newAccumulator2})
     } else if (id === 'equal') {
       return new ResultState({...this})
     } else if (['add', 'subtract'].includes(id) || (['add', 'subtract', 'multiply', 'divide'].includes(id) && ['multiply', 'divide'].includes(this.operator1))) {
