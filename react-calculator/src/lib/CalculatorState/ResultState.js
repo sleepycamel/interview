@@ -1,5 +1,5 @@
 import { CalculatorState, GetFirstNumberState, GetFirstFloatState, FirstOperatorState } from './';
-import { numDigits, appendDigit, toggleSign, getFloatReadout } from "../Helpers";
+import { numDigits, toggleSign, getFloatReadout } from "../Helpers";
 import { maxDigits } from "../constants";
 
 export default class ResultState extends CalculatorState {

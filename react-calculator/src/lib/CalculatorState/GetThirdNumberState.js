@@ -1,4 +1,4 @@
-import {CalculatorState, FirstOperatorState, GetSecondFloatState, ResultState} from './';
+import {CalculatorState, SecondOperatorState, ResultState} from './';
 import { numDigits, appendDigit, toggleSign } from "../Helpers";
 import { maxDigits } from "../constants";
 import GetThirdFloatState from "./GetThirdFloatState";
@@ -19,9 +19,12 @@ export default class GetThirdNumberState extends CalculatorState {
       return new GetThirdNumberState({...this, accumulator3} );
     } else if (id === 'equal') {
       return new ResultState({...this})
-    } else if (['multiply', 'divide'].includes(id)) {
-
-
+    } else if (type === 'operator') {
+      const nextState = new SecondOperatorState(this);
+      nextState.calculate();
+      nextState.operator2 = id;
+      nextState.accumulator3 = null;
+      return nextState;
     }
     return super.process(type, id, value);
   }

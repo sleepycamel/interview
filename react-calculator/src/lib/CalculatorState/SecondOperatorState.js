@@ -1,5 +1,5 @@
 import {CalculatorState, GetThirdFloatState, GetThirdNumberState, ResultState} from './';
-import {maxDigits} from "../constants";
+import {BUTTONS_TO_OP, maxDigits} from "../constants";
 
 export default class SecondOperatorState extends CalculatorState {
 
@@ -25,5 +25,16 @@ export default class SecondOperatorState extends CalculatorState {
     return super.process(type, id, value);
   }
 
+  calculate() {
+    const {accumulator2, operator2, accumulator3} = this;
+    const val2 = parseFloat(accumulator2);
+    const val3 = parseFloat(accumulator3);
+    const op2 = BUTTONS_TO_OP[operator2];
+    console.log({val2, val3, op2});
+    let result = eval(`${val2}${op2}${val3}`);
+    this.accumulator2 = result;
+    console.log({result});
+    return result;
+  }
 }
 

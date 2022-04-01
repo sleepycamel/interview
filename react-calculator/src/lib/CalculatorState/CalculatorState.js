@@ -38,6 +38,8 @@ export default class CalculatorState {
     if (op1 && op2) {
       result = eval(`${val1}${op1}${val2}${op2}${val3}`);
       this.accumulator1 = result.toString();
+      this.operator2 = null;
+      this.accumulator3 = null;
     } else {
       result = eval(`${val1}${op1}${val2}`);
       this.accumulator1 = result.toString();

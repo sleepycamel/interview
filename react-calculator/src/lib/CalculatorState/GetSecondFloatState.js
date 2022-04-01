@@ -1,4 +1,4 @@
-import {CalculatorState, FirstOperatorState, ResultState} from './';
+import {CalculatorState, FirstOperatorState, ResultState, SecondOperatorState} from './';
 import {numDigits, appendDigit, toggleSign, getFloatReadout} from "../Helpers";
 import { maxDigits } from "../constants";
 
@@ -21,6 +21,8 @@ export default class GetSecondFloatState extends CalculatorState {
       nextState.calculate();
       nextState.operator1 = id;
       return nextState;
+    } else if (['multiply', 'divide'].includes(id)) {
+      return new SecondOperatorState({...this, operator2: id});
     }
 
 return super.process(type, id, value);
