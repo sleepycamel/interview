@@ -3,6 +3,7 @@ import { numDigits, appendDigit, toggleSign } from "../Helpers";
 import { maxDigits } from "../constants";
 
 export default class GetFirstNumberState extends CalculatorState {
+
   getReadout() {
     return parseInt(this.accumulator1).toLocaleString();
   }
