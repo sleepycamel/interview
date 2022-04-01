@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Textfit } from "react-textfit";
-
 import styles from "../styles/SimpleCalculator.module.sass";
 import Button from "./Button";
 import {StartState} from "../lib/CalculatorState";
@@ -18,7 +17,7 @@ export default function SimpleCalculator() {
       // Update state using function to avoid stale closure
       setState((oldState) => {
         const newState = oldState.process(...action);
-        console.log({oldState, newState});
+        console.log('keyDown', {key, id: action[1], oldState, newState});
         return newState;
       });
     }
@@ -31,9 +30,8 @@ export default function SimpleCalculator() {
 
 
   const onClick = (type, id, value) => {
-    console.log('onClick', {type, id, value});
     const newState = state.process(type, id, value);
-    console.log({oldState: state, newState});
+    console.log('onClick', {type, id, oldState: state, newState});
     setState(newState);
   };
 
