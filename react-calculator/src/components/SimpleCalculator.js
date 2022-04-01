@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 
-import styles from "./CalculatorApp.module.sass";
-import Screen from "./Screen";
-import ButtonBox from "./ButtonBox";
+import styles from "./SimpleCalculator.module.sass";
+import Readout from "./Readout";
 import Button from "./Button";
 import {StartState} from "../lib/CalculatorState";
 
@@ -26,7 +25,7 @@ import {StartState} from "../lib/CalculatorState";
 
 const START_STATE = new StartState();
 
-export default function CalculatorApp() {
+export default function SimpleCalculator() {
   const [state, setState] = useState(START_STATE);
   const onKeyDown = evt => {
     const {key} = evt;
@@ -63,8 +62,8 @@ export default function CalculatorApp() {
 
   return (
       <div className={styles.CalculatorApp}>
-        <Screen value={state.getReadout()} />
-        <ButtonBox>
+        <Readout value={state.getReadout()} />
+        <div className={styles.buttonBox}>
           <Button id="clear" value="AC" type="function" onClick={onClick}/>
           <Button id="sign" value="±" type="function"  onClick={onClick} />
           <Button id="percent" value="%" type="function"  onClick={onClick} />
@@ -84,7 +83,7 @@ export default function CalculatorApp() {
           <Button id="num0" value={0} onClick={onClick} />
           <Button id="point" value="." onClick={onClick} />
           <Button id="equal" value="=" type="operator" onClick={onClick} />
-        </ButtonBox>
+        </div>
       </div>
   );
 }
