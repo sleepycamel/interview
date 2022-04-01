@@ -1,9 +1,9 @@
 import { StartState } from './';
+import {maxDigits} from "../constants";
 
 export default class CalculatorState {
 
   accumulator1 = "0";
-  readout = "0";
   operator1 = null;
   operator2 = null;
 
@@ -21,7 +21,7 @@ export default class CalculatorState {
   getOperator() { return null };
 
   getReadout() {
-    return parseFloat(this.accumulator1).toLocaleString();
+    return parseFloat(this.accumulator1).toLocaleString(undefined, {maximumFractionDigits: maxDigits});
   }
 }
 

@@ -1,18 +1,11 @@
 import { CalculatorState, FirstOperatorState } from './';
-import { numDigits, appendDigit, toggleSign } from "../Helpers";
+import { numDigits, appendDigit, toggleSign, getFloatReadout } from "../Helpers";
 import { maxDigits } from "../constants";
 
 export default class GetFirstFloatState extends CalculatorState {
 
   getReadout() {
-    const {accumulator1} = this;
-    const val = parseFloat(accumulator1);
-    let readout = accumulator1;
-    if (val !== 0) {
-      readout = val.toLocaleString(undefined, {maximumFractionDigits: maxDigits});
-    }
-    if (!readout.includes('.')) readout += '.';
-    return readout;
+    return getFloatReadout(this.accumulator1);
   }
 
   process(type, id, value) {

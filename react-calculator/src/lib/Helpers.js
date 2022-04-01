@@ -1,3 +1,4 @@
+import {maxDigits} from "./constants";
 
 export function numDigits(s) {
   return s.replace(/[^0-9]+/g, "").length;
@@ -16,4 +17,14 @@ export function toggleSign(s) {
     return s.substring(1);
   }
   return '-'+s;
+}
+
+export function getFloatReadout(s) {
+  const val = parseFloat(s);
+  let readout = s;
+  if (val !== 0) {
+    readout = val.toLocaleString(undefined, {maximumFractionDigits: maxDigits});
+  }
+  if (!readout.includes('.')) readout += '.';
+  return readout;
 }

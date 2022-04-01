@@ -12,7 +12,7 @@ export default class StartState extends CalculatorState {
   process(type, id, value) {
     // console.log('StartState: process input', {type, id, value});
     if (id === 'point') {
-      return new GetFirstFloatState('0.');
+      return new GetFirstFloatState({accumulator1: '0.'});
     } else if (type === 'number' && id !== 'num0') {
       const accumulator1 = appendDigit(this.accumulator1, value);
       return new GetFirstNumberState({accumulator1} );
