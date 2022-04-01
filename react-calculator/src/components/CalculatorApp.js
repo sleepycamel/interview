@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 
 import styles from "./CalculatorApp.module.sass";
 import Screen from "./Screen";
@@ -23,11 +23,6 @@ import {StartState} from "../lib/CalculatorState";
 //   [1, 2, 3, "+"],
 //   [0, ".", "="],
 // ];
-
-const toLocaleString = (num) =>
-    String(num).replace(/(?<!\..*)(\d)(?=(?:\d{3})+(?:\.|$))/g, "$1 ");
-
-const removeSpaces = (num) => num.toString().replace(/\s/g, "");
 
 const START_STATE = new StartState();
 

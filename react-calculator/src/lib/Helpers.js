@@ -1,4 +1,3 @@
-import {maxDigits} from "./constants";
 
 export function numDigits(s) {
   return s.replace(/[^0-9]+/g, "").length;

@@ -1,4 +1,4 @@
-import { CalculatorState, StartState } from './';
+import { CalculatorState } from './';
 import {numDigits, appendDigit, toggleSign, getFloatReadout} from "../Helpers";
 import { maxDigits } from "../constants";
 

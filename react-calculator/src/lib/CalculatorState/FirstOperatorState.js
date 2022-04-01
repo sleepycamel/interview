@@ -1,6 +1,4 @@
 import { CalculatorState, GetSecondFloatState, GetSecondNumberState } from './';
-import { numDigits, toggleSign } from "../Helpers";
-import { maxDigits } from "../constants";
 
 export default class FirstOperatorState extends CalculatorState {
 
