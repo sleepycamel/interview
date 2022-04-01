@@ -20,11 +20,16 @@ export function toggleSign(s) {
 }
 
 export function getFloatReadout(s) {
-  const val = parseFloat(s);
-  let readout = s;
-  if (val !== 0) {
-    readout = val.toLocaleString(undefined, {maximumFractionDigits: maxDigits});
-  }
+  let readout = formatWithCommas(s);
   if (!readout.includes('.')) readout += '.';
   return readout;
+}
+
+// Formats numeric string with commas like toLocaleString() but preserves trailing zeros after decimal
+export function formatWithCommas(s) {
+  const parts = s.split(".");
+  const numberPart = parts[0];
+  const decimalPart = parts[1];
+  const thousands = /\B(?=(\d{3})+(?!\d))/g;
+  return numberPart.replace(thousands, ",") + (decimalPart ? "." + decimalPart : "");
 }
