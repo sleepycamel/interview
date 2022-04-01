@@ -1,4 +1,4 @@
-import { CalculatorState, GetSecondFloatState, GetSecondNumberState } from './';
+import {CalculatorState, GetSecondFloatState, GetSecondNumberState, ResultState} from './';
 
 export default class FirstOperatorState extends CalculatorState {
 
@@ -11,7 +11,9 @@ export default class FirstOperatorState extends CalculatorState {
       return new GetSecondFloatState({...this, accumulator2: "0."} )
     } else if (type === 'number') {
       return new GetSecondNumberState({...this, accumulator2: `${value}`});
-    } else if (type === 'operator' && id !== 'equal') {
+    } else if (id === 'equal') {
+      return new ResultState({...this, accumulator2: this.accumulator1});
+    } else if (type === 'operator') {
       return new FirstOperatorState({...this, operator1: id});
     }
 

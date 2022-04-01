@@ -1,3 +1,4 @@
+import {KEYS_TO_BUTTON} from "./constants";
 
 export function numDigits(s) {
   return s.replace(/[^0-9]+/g, "").length;
@@ -31,4 +32,18 @@ export function formatWithCommas(s) {
   const decimalPart = parts[1];
   const thousands = /\B(?=(\d{3})+(?!\d))/g;
   return numberPart.replace(thousands, ",") + (decimalPart ? "." + decimalPart : "");
+}
+
+export function keyToAction(key) {
+  let action = null;
+  if ('0123456789'.includes(key)) {
+    action = ['number', `num${key}`, parseInt(key)];
+  } else if (key === '.') {
+    action = ['number', 'point', key];
+  } else if ('+-*/'.includes(key)) {
+    action = ['operator', KEYS_TO_BUTTON[key], key];
+  } else if (key === 'Enter') {
+    action = ['operator', 'equal', '='];
+  }
+  return action;
 }

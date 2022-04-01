@@ -4,24 +4,7 @@ import styles from "./SimpleCalculator.module.sass";
 import Readout from "./Readout";
 import Button from "./Button";
 import {StartState} from "../lib/CalculatorState";
-
-// const Op = (id, val) => ({ type: 'op', id, val: val || id });
-// const Num = (val) => ({ type: 'num', id: `num${val}`, val});
-// const Func = (id, val) => ({type: 'func', id, val});
-//
-// const buttons = [
-//     [Func("clear", "AC"), Func("sign", "±"), Func("percent", "%"), Func("divide", "÷")]
-//     [Num(7), Num(8), Num(9), Op("multiply", "x")],
-//
-// ]
-// const btnValues = [
-//
-//   ["C", "+-", "%", "/"],
-//   [7, 8, 9, "X"],
-//   [4, 5, 6, "-"],
-//   [1, 2, 3, "+"],
-//   [0, ".", "="],
-// ];
+import {keyToAction} from "../lib/Helpers";
 
 const START_STATE = new StartState();
 
@@ -30,15 +13,14 @@ export default function SimpleCalculator() {
   const onKeyDown = evt => {
     const {key} = evt;
     console.log('onKeyDown', {key});
-    let action;
-    if ('0123456789'.includes(key)) {
-      action = ['number', `num${key}`, parseInt(key)];
-    } else if (key === '.') {
-      action = ['number', 'point', key];
-    }
+    const action = keyToAction(key);
     if (action) {
       // Update state using function to avoid stale closure
-      setState((oldState) => oldState.process(...action));
+      setState((oldState) => {
+        const newState = oldState.process(...action);
+        console.log({oldState, newState});
+        return newState;
+      });
     }
   };
 
@@ -63,7 +45,7 @@ export default function SimpleCalculator() {
   return (
       <div className={styles.CalculatorApp}>
         <Readout value={state.getReadout()} />
-        <div className={styles.buttonBox}>
+        <div className={styles.buttonGrid}>
           <Button id="clear" value="AC" type="function" onClick={onClick}/>
           <Button id="sign" value="±" type="function"  onClick={onClick} />
           <Button id="percent" value="%" type="function"  onClick={onClick} />

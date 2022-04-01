@@ -1,9 +1,10 @@
 import { StartState } from './';
-import {maxDigits} from "../constants";
+import {maxDigits, BUTTONS_TO_OP} from "../constants";
 
 export default class CalculatorState {
 
   accumulator1 = "0";
+  accumulator2 = null;
   operator1 = null;
   operator2 = null;
 
@@ -28,11 +29,11 @@ export default class CalculatorState {
     const {accumulator1, operator1, accumulator2} = this;
     const val1 = parseFloat(accumulator1);
     const val2 = parseFloat(accumulator2);
-    const opts = { add: '+', subtract: '-', multiply: '*', divide: '/' };
-    const op = opts[operator1];
+    console.log({val1, val2});
+    const op = BUTTONS_TO_OP[operator1];
     const result = eval(`${val1}${op}${val2}`);
-    this.accumulator1 = result.toLocaleString(undefined, {maximumFractionDigits: maxDigits})
-    this.accumulator2 = this.operator1 = null;
+    this.accumulator1 = result.toString();
+    // this.accumulator2 = this.operator1 = null;
     console.log({result});
     return result;
   }
