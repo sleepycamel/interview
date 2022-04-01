@@ -63,11 +63,12 @@ export default function CalculatorApp() {
   };
 
   const activeOperator = state.getOperator();
-  console.log('operator = ', activeOperator);
+  const readout = state.getReadout();
+  console.log({activeOperator, readout});
 
   return (
       <div className={styles.CalculatorApp}>
-        <Screen value={state.readout} />
+        <Screen value={state.getReadout()} />
         <ButtonBox>
           <Button id="clear" value="AC" type="function" onClick={onClick}/>
           <Button id="sign" value="±" type="function"  onClick={onClick} />

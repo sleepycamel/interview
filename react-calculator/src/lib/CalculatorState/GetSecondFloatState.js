@@ -3,29 +3,23 @@ import { numDigits, appendDigit, toggleSign } from "../Helpers";
 import { maxDigits } from "../constants";
 
 export default class GetSecondFloatState extends CalculatorState {
-  constructor(accumulator1, accumulator2, operator1) {
+  getReadout() {
+    const {accumulator2} = this;
     const val = parseFloat(accumulator2);
     let readout = accumulator2;
     if (val !== 0) {
       readout = val.toLocaleString(undefined, {maximumFractionDigits: maxDigits});
     }
     if (!readout.includes('.')) readout += '.';
-    super(accumulator1, readout);
+    return readout;
   }
+
   process(type, id, value) {
-    const accumulator1 = this.accumulator1;
-    const newAccumulator1 = appendDigit(this.accumulator1, value);
-    if (id === 'point' && numDigits(this.accumulator1) < maxDigits) {
-      return new GetSecondFloatState(newAccumulator1);
-    } else if (id === 'point') {
-      return this; // noop - 1 decimal point per number
-    } else if (id === 'sign') {
-      return new GetSecondFloatState(toggleSign(this.accumulator1))
-    } else if (type === 'number' && numDigits(accumulator1) === maxDigits) {
-      return this; // noop - max number of digits reached
-    } else if (type === 'number') {
-      const newAccumulator1 = `${this.accumulator1}${value}`;
-      return new GetSecondFloatState(newAccumulator1);
+    if (id === 'sign') {
+      return new GetSecondFloatState({...this, accumulator2: toggleSign(this.accumulator2)});
+    } else if (type === 'number' && id !== 'point' && numDigits(this.accumulator2) < maxDigits) {
+      const accumulator2 = appendDigit(this.accumulator2, value);
+      return new GetSecondFloatState({...this, accumulator2});
     }
     return super.process(type, id, value);
   }

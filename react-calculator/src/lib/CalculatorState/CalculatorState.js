@@ -7,10 +7,11 @@ export default class CalculatorState {
   operator1 = null;
   operator2 = null;
 
-  constructor(accumulator1="0", readout="0") {
+  constructor(args) {
     // console.log('base constructor', {accumulator1, readout});
-    this.accumulator1 = accumulator1;
-    this.readout = readout.toLocaleString();
+    Object.assign(this, args);
+    // this.accumulator1 = accumulator1;
+    // this.readout = readout.toLocaleString();
   }
 
   process(type, id, value) {
@@ -22,6 +23,10 @@ export default class CalculatorState {
 
   getOperator() {
     return this.operator2 ? this.operator2 : this.operator1;
+  }
+
+  getReadout() {
+    return this.accumulator1;
   }
 }
 
