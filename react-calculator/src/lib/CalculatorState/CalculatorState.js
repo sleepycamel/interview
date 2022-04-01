@@ -5,6 +5,7 @@ export default class CalculatorState {
 
   accumulator1 = "0";
   accumulator2 = null;
+  accumulator3 = null;
   operator1 = null;
   operator2 = null;
 
@@ -26,13 +27,21 @@ export default class CalculatorState {
   }
 
   calculate() {
-    const {accumulator1, operator1, accumulator2} = this;
+    const {accumulator1, operator1, accumulator2, operator2, accumulator3} = this;
     const val1 = parseFloat(accumulator1);
     const val2 = parseFloat(accumulator2);
-    console.log({val1, val2});
-    const op = BUTTONS_TO_OP[operator1];
-    const result = eval(`${val1}${op}${val2}`);
-    this.accumulator1 = result.toString();
+    const val3 = parseFloat(accumulator3);
+    console.log({val1, val2, val3});
+    const op1 = BUTTONS_TO_OP[operator1];
+    const op2 = BUTTONS_TO_OP[operator2];
+    let result;
+    if (op1 && op2) {
+      result = eval(`${val1}${op1}${val2}${op2}${val3}`);
+      this.accumulator1 = result.toString();
+    } else {
+      result = eval(`${val1}${op1}${val2}`);
+      this.accumulator1 = result.toString();
+    }
     // this.accumulator2 = this.operator1 = null;
     console.log({result});
     return result;

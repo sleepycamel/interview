@@ -1,4 +1,4 @@
-import {CalculatorState, FirstOperatorState, GetSecondFloatState, ResultState} from './';
+import {CalculatorState, FirstOperatorState, GetSecondFloatState, SecondOperatorState, ResultState} from './';
 import { numDigits, appendDigit, toggleSign } from "../Helpers";
 import { maxDigits } from "../constants";
 
@@ -18,11 +18,13 @@ export default class GetSecondNumberState extends CalculatorState {
       return new GetSecondNumberState({...this, accumulator2} );
     } else if (id === 'equal') {
       return new ResultState({...this})
-    } else if (['add', 'subtract'].includes(id)) {
+    } else if (['add', 'subtract'].includes(id) || (['add', 'subtract', 'multiply', 'divide'].includes(id) && ['multiply', 'divide'].includes(this.operator1))) {
       const nextState = new FirstOperatorState(this);
       nextState.calculate();
       nextState.operator1 = id;
       return nextState;
+    } else if (['multiply', 'divide'].includes(id)) {
+      return new SecondOperatorState({...this, operator2: id});
     }
 
     return super.process(type, id, value);

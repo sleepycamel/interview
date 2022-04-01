@@ -16,7 +16,7 @@ export default class GetSecondFloatState extends CalculatorState {
       return new GetSecondFloatState({...this, accumulator2});
     } else if (id === 'equal') {
       return new ResultState({...this});
-    } else if (['add', 'subtract'].includes(id)) {
+    } else if (['add', 'subtract'].includes(id) || (['add', 'subtract', 'multiply', 'divide'].includes(id) && ['multiply', 'divide'].includes(this.operator1))) {
       const nextState = new FirstOperatorState(this);
       nextState.calculate();
       nextState.operator1 = id;
