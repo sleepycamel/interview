@@ -30,10 +30,9 @@ export default class SecondOperatorState extends CalculatorState {
     const val2 = parseFloat(accumulator2);
     const val3 = parseFloat(accumulator3);
     const op2 = BUTTONS_TO_OP[operator2];
-    console.log({val2, val3, op2});
+    // eslint-disable-next-line no-eval
     let result = eval(`${val2}${op2}${val3}`);
     this.accumulator2 = result;
-    console.log({result});
     return result;
   }
 }

@@ -12,7 +12,6 @@ export default function SimpleCalculator() {
   const [state, setState] = useState(START_STATE);
   const onKeyDown = evt => {
     const {key} = evt;
-    console.log('onKeyDown', {key});
     const action = keyToAction(key);
     if (action) {
       // Update state using function to avoid stale closure
@@ -25,9 +24,8 @@ export default function SimpleCalculator() {
   };
 
   useEffect( () => {
-    console.log('mount');
     document.addEventListener("keydown", onKeyDown);
-    return () => { console.log('cleanup'); document.removeEventListener("keydown", onKeyDown) }
+    return () => { document.removeEventListener("keydown", onKeyDown) }
   }, [])
 
 

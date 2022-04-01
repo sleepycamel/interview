@@ -19,6 +19,5 @@ export default class FirstOperatorState extends CalculatorState {
 
     return super.process(type, id, value);
   }
-
 }
 
