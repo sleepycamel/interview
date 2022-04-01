@@ -40,11 +40,10 @@ export default function SimpleCalculator() {
 
   const activeOperator = state.getOperator();
   const readout = state.getReadout();
-  console.log({activeOperator, readout});
 
   return (
-      <div className={styles.CalculatorApp}>
-        <Readout value={state.getReadout()} />
+      <div className={styles.SimpleCalculator}>
+        <Readout value={readout} />
         <div className={styles.buttonGrid}>
           <Button id="clear" value="AC" type="function" onClick={onClick}/>
           <Button id="sign" value="±" type="function"  onClick={onClick} />

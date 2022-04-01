@@ -1,4 +1,4 @@
-import { CalculatorState, ResultState } from './';
+import {CalculatorState, FirstOperatorState, ResultState} from './';
 import {numDigits, appendDigit, toggleSign, getFloatReadout} from "../Helpers";
 import { maxDigits } from "../constants";
 
@@ -16,7 +16,13 @@ export default class GetSecondFloatState extends CalculatorState {
       return new GetSecondFloatState({...this, accumulator2});
     } else if (id === 'equal') {
       return new ResultState({...this});
+    } else if (['add', 'subtract'].includes(id)) {
+      const nextState = new FirstOperatorState(this);
+      nextState.calculate();
+      nextState.operator1 = id;
+      return nextState;
     }
-    return super.process(type, id, value);
+
+return super.process(type, id, value);
   }
 }
