@@ -1,4 +1,4 @@
-import { CalculatorState, GetSecondFloatState } from './';
+import { CalculatorState, GetSecondFloatState, EqualsState } from './';
 import { numDigits, appendDigit, toggleSign } from "../Helpers";
 import { maxDigits } from "../constants";
 
@@ -16,7 +16,10 @@ export default class GetSecondNumberState extends CalculatorState {
       return new GetSecondNumberState({...this, accumulator2: toggleSign(this.accumulator2)});
     } else if (type === 'number' && numDigits(this.accumulator2) < maxDigits) {
       return new GetSecondNumberState({...this, accumulator2} );
+    } else if (id === 'equal') {
+      return new EqualsState({...this})
     }
+
     return super.process(type, id, value);
   }
 }

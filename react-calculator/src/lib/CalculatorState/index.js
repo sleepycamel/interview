@@ -5,6 +5,7 @@ import GetFirstFloatState from "./GetFirstFloatState";
 import GetSecondNumberState from "./GetSecondNumberState";
 import GetSecondFloatState from "./GetSecondFloatState";
 import FirstOperatorState from "./FirstOperatorState";
+import EqualsState from "./EqualsState";
 
 export {
   CalculatorState,
@@ -14,5 +15,6 @@ export {
   GetSecondFloatState,
   GetSecondNumberState,
   FirstOperatorState,
+  EqualsState
 }
 

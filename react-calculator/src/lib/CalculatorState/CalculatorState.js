@@ -23,5 +23,18 @@ export default class CalculatorState {
   getReadout() {
     return parseFloat(this.accumulator1).toLocaleString(undefined, {maximumFractionDigits: maxDigits});
   }
+
+  calculate() {
+    const {accumulator1, operator1, accumulator2} = this;
+    const val1 = parseFloat(accumulator1);
+    const val2 = parseFloat(accumulator2);
+    const opts = { add: '+', subtract: '-', multiply: '*', divide: '/' };
+    const op = opts[operator1];
+    const result = eval(`${val1}${op}${val2}`);
+    this.accumulator1 = result.toLocaleString(undefined, {maximumFractionDigits: maxDigits})
+    this.accumulator2 = this.operator1 = null;
+    console.log({result});
+    return result;
+  }
 }
 
