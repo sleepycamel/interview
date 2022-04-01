@@ -40,7 +40,7 @@ export default class CalculatorState {
       this.accumulator1 = result.toString();
       this.operator2 = null;
       this.accumulator3 = null;
-    } else {
+    } else if (op1) {
       // eslint-disable-next-line no-eval
       result = eval(`${val1}${op1}${val2}`);
       this.accumulator1 = result.toString();

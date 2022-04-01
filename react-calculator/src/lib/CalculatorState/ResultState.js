@@ -10,7 +10,7 @@ export default class ResultState extends CalculatorState {
   }
 
   getReadout() {
-    return getFloatReadout(this.accumulator1);
+    return getFloatReadout(this.accumulator1).replace(/\.$/, '');
   }
 
   process(type, id, value) {
