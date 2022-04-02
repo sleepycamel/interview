@@ -1,6 +1,6 @@
 import {CalculatorState, FirstOperatorState, GetSecondFloatState, SecondOperatorState, ResultState} from './';
 import { numDigits, appendDigit, toggleSign, toPercentDecimalStr } from "../helpers";
-import { maxDigits } from "../constants";
+import { READOUT_MAX_DIGITS } from "../constants";
 
 export default class GetSecondNumberState extends CalculatorState {
 
@@ -10,11 +10,11 @@ export default class GetSecondNumberState extends CalculatorState {
 
   process(type, id, value) {
     const accumulator2 = appendDigit(this.accumulator2, value);
-    if (id === 'point' && numDigits(this.accumulator2) < maxDigits) {
+    if (id === 'point' && numDigits(this.accumulator2) < READOUT_MAX_DIGITS) {
       return new GetSecondFloatState({...this, accumulator2});
     } else if (id === 'sign') {
       return new GetSecondNumberState({...this, accumulator2: toggleSign(this.accumulator2)});
-    } else if (type === 'number' && numDigits(this.accumulator2) < maxDigits) {
+    } else if (type === 'number' && numDigits(this.accumulator2) < READOUT_MAX_DIGITS) {
       return new GetSecondNumberState({...this, accumulator2} );
     } else if (id === 'percent') {
       return new GetSecondFloatState({...this, accumulator2: toPercentDecimalStr(this.accumulator2)})

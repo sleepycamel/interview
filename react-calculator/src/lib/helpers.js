@@ -1,4 +1,4 @@
-import {maxDigits, KEYS_TO_BUTTON} from "./constants";
+import {READOUT_MAX_DIGITS, KEYS_TO_BUTTON} from "./constants";
 
 export function numDigits(s) {
   return s.replace(/[^0-9]+/g, "").length;
@@ -49,6 +49,6 @@ export function keyToAction(key) {
 }
 
 export function toPercentDecimalStr(accumulator) {
-  const floatval = (parseFloat(accumulator)/100).toFixed(maxDigits);
+  const floatval = (parseFloat(accumulator)/100).toFixed(READOUT_MAX_DIGITS);
   return floatval.toString().replace(/0+$/, '');
 }

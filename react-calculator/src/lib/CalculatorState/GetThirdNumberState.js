@@ -1,6 +1,6 @@
 import {CalculatorState, SecondOperatorState, ResultState} from './';
 import { numDigits, appendDigit, toggleSign } from "../helpers";
-import { maxDigits } from "../constants";
+import { READOUT_MAX_DIGITS } from "../constants";
 import GetThirdFloatState from "./GetThirdFloatState";
 
 export default class GetThirdNumberState extends CalculatorState {
@@ -11,11 +11,11 @@ export default class GetThirdNumberState extends CalculatorState {
 
   process(type, id, value) {
     const accumulator3 = appendDigit(this.accumulator3, value);
-    if (id === 'point' && numDigits(this.accumulator3) < maxDigits) {
+    if (id === 'point' && numDigits(this.accumulator3) < READOUT_MAX_DIGITS) {
       return new GetThirdFloatState({...this, accumulator3});
     } else if (id === 'sign') {
       return new GetThirdNumberState({...this, accumulator3: toggleSign(this.accumulator3)});
-    } else if (type === 'number' && numDigits(this.accumulator3) < maxDigits) {
+    } else if (type === 'number' && numDigits(this.accumulator3) < READOUT_MAX_DIGITS) {
       return new GetThirdNumberState({...this, accumulator3} );
     } else if (id === 'equal') {
       return new ResultState({...this})

@@ -1,5 +1,5 @@
 import {CalculatorState, GetThirdFloatState, GetThirdNumberState, ResultState} from './';
-import {BUTTONS_TO_OP, maxDigits} from "../constants";
+import {BUTTONS_TO_OP, READOUT_MAX_DIGITS} from "../constants";
 
 export default class SecondOperatorState extends CalculatorState {
 
@@ -8,7 +8,7 @@ export default class SecondOperatorState extends CalculatorState {
   }
 
   getReadout() {
-    return parseFloat(this.accumulator2).toLocaleString(undefined, {maximumFractionDigits: maxDigits});
+    return parseFloat(this.accumulator2).toLocaleString(undefined, {maximumFractionDigits: READOUT_MAX_DIGITS});
   }
 
   process(type, id, value) {
